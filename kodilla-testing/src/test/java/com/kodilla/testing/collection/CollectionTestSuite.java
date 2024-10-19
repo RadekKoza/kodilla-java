@@ -48,6 +48,6 @@ class CollectionTestSuite {
         List<Integer> result = oddNumbersExterminator.exterminate(numbers);
         List<Integer> expectedResult = Arrays.asList(54,46,444,68);
         //Then
-        Assertions.assertEquals(expectedResult, result);;
+        Assertions.assertEquals(expectedResult, result);
     }
 }

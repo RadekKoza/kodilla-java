@@ -3,6 +3,8 @@ package com.kodilla.testing.forum;
 import com.kodilla.testing.user.SimpleUser;
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DisplayName("Forum Test Suite")
 class ForumTestSuite {                                         // [5]
     @BeforeEach
@@ -36,7 +38,7 @@ class ForumTestSuite {                                         // [5]
         String result = simpleUser.getRealName();
         System.out.println("Testing " + result);
         //Then
-        Assertions.assertEquals("John Smith", result);
+        assertEquals("John Smith", result);
     }
 
     @DisplayName("When created SimpleUser with name, " +
@@ -52,6 +54,6 @@ class ForumTestSuite {                                         // [5]
         String expectedResult = "theForumUser";                  // [10]
 
         //Then
-        Assertions.assertEquals(expectedResult, result);         // [11]
+        assertEquals(expectedResult, result);         // [11]
     }
 }
