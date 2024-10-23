@@ -1,18 +1,17 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.book.Book;
-import com.kodilla.stream.book.BookDirectory;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.kodilla.stream.beautifier.PoemBeautifier;
+
+import java.util.Arrays;
+
 
 public class StreamMain {
     public static void main(String[] args) {
-        BookDirectory theBookDirectory = new BookDirectory();
-        String theResultStringOfBooks = theBookDirectory.getList().stream() // [1]
-                        .filter(book -> book.getYearOfPublication() > 2005)
-                        .map(Book::toString)
-                        .collect(Collectors.joining(",\n","<<",">>"));// [2]
-        System.out.println(theResultStringOfBooks);
+        PoemBeautifier poemBeautifier = new PoemBeautifier();
+        poemBeautifier.beautify(() -> System.out.println("wiersz leader".indent(3)));
+        poemBeautifier.beautify(() -> System.out.println("wiersz nadęty".toUpperCase()));
+        poemBeautifier.beautify(() -> System.out.println("wiersz garbaty".replace("er","ER")
+                .replace("rb","RB")));
+        poemBeautifier.beautify(() -> System.out.println("wiersz " + "echo! ".repeat(3)));
     }
 }
