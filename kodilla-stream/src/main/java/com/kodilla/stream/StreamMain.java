@@ -1,17 +1,23 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import java.util.Arrays;
-
+import static java.time.LocalDate.now;
 
 public class StreamMain {
     public static void main(String[] args) {
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify("to jest wiersz leader",(poem) -> System.out.println(poem.indent(3)));
-        poemBeautifier.beautify("to jest wiersz nadęty", (poem) -> System.out.println(poem.toUpperCase()));
-        poemBeautifier.beautify("to jest wiersz garbaty", (poem) -> System.out.println(poem.replace("er","ER")
-                .replace("rb","RB")));
-        poemBeautifier.beautify("to jest wiersz ", (poem) -> System.out.println(poem + " echo! ".repeat(3)));
+        Forum forum = new Forum();
+        Map<Integer, ForumUser> mapOfUsers = forum.getUsersList().stream()
+                .filter(user -> user.getSex() == 'M')
+                .filter(user -> user.getDateOfBirth().until(now()).getYears() > 20)
+                .filter(user -> user.getPostsQuantity() > 0 )
+                .collect(Collectors.toMap(ForumUser::getIdNumber, user -> user));
+        System.out.println("Selected forum users map: ");
+        mapOfUsers.entrySet().stream()
+                .map(entry -> entry.getKey() + ":" + entry.getValue())
+                .forEach(System.out::println);
     }
 }
