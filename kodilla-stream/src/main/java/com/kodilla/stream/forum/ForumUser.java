@@ -1,67 +1,40 @@
 package com.kodilla.stream.forum;
 
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public final class ForumUser {
+    private final int IdNumber;
     private final String username;
-    private final String realName;
-    private final String location;
-    private final Set<ForumUser> friends = new HashSet<>();
+    private final char sex;
+    private final LocalDate dateOfBirth;
+    private int postsQuantity;
 
-    public ForumUser(final String username, final String realName, final String location) {
+    public ForumUser(final int idNumber, final String username, final char sex, final LocalDate dateOfBirth, int postsQuantity) {
+        this.IdNumber = idNumber;
         this.username = username;
-        this.realName = realName;
-        this.location = location;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.postsQuantity = postsQuantity;
     }
 
-    public void addFriend(ForumUser user) {
-        friends.add(user);
+    public int getIdNumber() {
+        return IdNumber;
     }
-    public boolean removeFriend(ForumUser user) {
-        return friends.remove(user);
-    }
-
-    public Set<String> getLocationsOfFriends() {
-        return friends.stream()
-                .map(friend -> friend.getLocation()) //[1]
-                .collect(Collectors.toSet());
-    }
-
-    public Set<String> getLocationsOfFriendsOfFriends() {
-        return friends.stream() //[1]
-                .flatMap(user -> user.getFriends().stream()) //[2]
-                .filter(user -> user != this) //[3]
-                .map(ForumUser::getLocation) //[4]
-                .collect(Collectors.toSet()); // [5]
-    }
-
 
     public String getUsername() {
         return username;
     }
 
-    public String getRealName() {
-        return realName;
+    public char getSex() {return sex;
     }
 
-    public String getLocation() {
-        return location;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public Set<ForumUser> getFriends() {
-        return friends;
-    }
-
-    @Override
-    public String toString() {
-        return "ForumUser{" +
-                "username='" + username + '\'' +
-                ", realName='" + realName + '\'' +
-                ", location='" + location + '\'' +
-                '}';
+    public int getPostsQuantity() {
+        return postsQuantity;
     }
 
     @Override
@@ -69,11 +42,22 @@ public final class ForumUser {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ForumUser forumUser = (ForumUser) o;
-        return Objects.equals(username, forumUser.username);
+        return getIdNumber() == forumUser.getIdNumber() && getSex() == forumUser.getSex() && Objects.equals(getUsername(), forumUser.getUsername()) && Objects.equals(getDateOfBirth(), forumUser.getDateOfBirth());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(username);
+        return Objects.hash(getIdNumber(), getUsername(), getDateOfBirth());
+    }
+
+    @Override
+    public String toString() {
+        return "ForumUser{" +
+                "IdNumber=" + IdNumber +
+                ", username='" + username + '\'' +
+                ", sex=" + sex +
+                ", dateOfBirth=" + dateOfBirth +
+                ", postsQuantity=" + postsQuantity +
+                '}';
     }
 }
