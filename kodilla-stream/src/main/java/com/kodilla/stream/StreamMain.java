@@ -8,10 +8,10 @@ import java.util.Arrays;
 public class StreamMain {
     public static void main(String[] args) {
         PoemBeautifier poemBeautifier = new PoemBeautifier();
-        poemBeautifier.beautify(() -> System.out.println("wiersz leader".indent(3)));
-        poemBeautifier.beautify(() -> System.out.println("wiersz nadęty".toUpperCase()));
-        poemBeautifier.beautify(() -> System.out.println("wiersz garbaty".replace("er","ER")
+        poemBeautifier.beautify("to jest wiersz leader",(poem) -> System.out.println(poem.indent(3)));
+        poemBeautifier.beautify("to jest wiersz nadęty", (poem) -> System.out.println(poem.toUpperCase()));
+        poemBeautifier.beautify("to jest wiersz garbaty", (poem) -> System.out.println(poem.replace("er","ER")
                 .replace("rb","RB")));
-        poemBeautifier.beautify(() -> System.out.println("wiersz " + "echo! ".repeat(3)));
+        poemBeautifier.beautify("to jest wiersz ", (poem) -> System.out.println(poem + " echo! ".repeat(3)));
     }
 }
