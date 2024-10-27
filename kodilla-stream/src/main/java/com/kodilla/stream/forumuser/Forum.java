@@ -28,5 +28,3 @@ public final class Forum {
         return new HashSet<>(users);
     }
 }
-
-

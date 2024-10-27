@@ -1,4 +1,4 @@
-package com.kodilla.stream.forum;
+package com.kodilla.stream.forumuser;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,7 +10,8 @@ public final class ForumUser {
     private final LocalDate dateOfBirth;
     private int postsQuantity;
 
-    public ForumUser(final int idNumber, final String username, final char sex, final LocalDate dateOfBirth, int postsQuantity) {
+    public ForumUser(final int idNumber, final String username, final char sex,
+                     final LocalDate dateOfBirth, int postsQuantity) {
         this.IdNumber = idNumber;
         this.username = username;
         this.sex = sex;
@@ -26,7 +27,8 @@ public final class ForumUser {
         return username;
     }
 
-    public char getSex() {return sex;
+    public char getSex() {
+        return sex;
     }
 
     public LocalDate getDateOfBirth() {
@@ -47,7 +49,8 @@ public final class ForumUser {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdNumber(), getUsername(), getDateOfBirth());
+        return Objects.hash(getIdNumber(),
+                getUsername(), getDateOfBirth());
     }
 
     @Override

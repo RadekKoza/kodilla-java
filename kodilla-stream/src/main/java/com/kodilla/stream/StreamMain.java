@@ -9,15 +9,14 @@ import static java.time.LocalDate.now;
 
 public class StreamMain {
     public static void main(String[] args) {
+        System.out.println("Selected forum users collection: ");
         Forum forum = new Forum();
         Map<Integer, ForumUser> mapOfUsers = forum.getUsersList().stream()
                 .filter(user -> user.getSex() == 'M')
                 .filter(user -> user.getDateOfBirth().until(now()).getYears() > 20)
-                .filter(user -> user.getPostsQuantity() > 0 )
+                .filter(user -> user.getPostsQuantity() > 0)
                 .collect(Collectors.toMap(ForumUser::getIdNumber, user -> user));
-        System.out.println("Selected forum users map: ");
         mapOfUsers.entrySet().stream()
-                .map(entry -> entry.getKey() + ":" + entry.getValue())
-                .forEach(System.out::println);
-    }
+                .forEach(e -> System.out.println(e));
+        }
 }
