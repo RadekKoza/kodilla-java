@@ -39,5 +39,4 @@ public class TaskList {
         if (!(o instanceof TaskList taskList)) return false;
         return name.equals(taskList.name);
     }
-
 }

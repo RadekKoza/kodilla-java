@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import static java.time.LocalDate.now;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,6 +68,22 @@ class BoardTestSuite {
                         .count(); //[8]
         //Then
         assertEquals(2, longTasks); // [9]
+    }
+
+    @Test
+    void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        double meanTimeInProcess = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .mapToDouble(t -> t.getCreated().until(now()).getDays())
+                .average().getAsDouble();
+        //Then
+        assertEquals(10.0,meanTimeInProcess);
     }
 
     private Board prepareTestData() {
