@@ -1,45 +1,58 @@
 package com.kodilla.testing.forum.statistics;
 
-import java.util.List;
+public class ForumStatistics {
 
-public class ForumStatistics implements Statistics {
+    private int usersCount;
+    private int postsCount;
+    private int commentsCount;
+    private double meanPostsNumberPerUser;
+    private double meanCommentsNumberPerUser;
+    private double meanCommentsNumberPerPost;
 
-    private int usersNumber;
-    private int postsNumber;
-    private int commentsNumber;
-    private int meanPostsPerUserNumber;
-    private int meanCommentsPerPostNumber;
-
-
-//        this.usersNumber = usersNumber;
-//        this.postsNumber = postsNumber;
-//        this.commentsNumber = commentsNumber;
-//        this.meanPostsPerUserNumber = meanPostsPerUserNumber;
-//        this.meanCommentsPerPostNumber = meanCommentsPerPostNumber;
-//    }
-
-public ForumStatistics(int usersNumber, int postsNumber, int commentsNumber, int meanPostsPerUserNumber, int meanCommentsPerPostNumber) {
-
-    public List<String> usersNames () {
-        return List.of("evuyg", "qerwvybgou", "dfwhvbu", "eiwocb");
+    public ForumStatistics(Statistics statistics) {
     }
 
-    public int postsCount () {
-        return 99;
+    public Statistics calculateAdvStatistics (Statistics statistics) {
+        usersCount = statistics.usersNames().size();
+        postsCount = statistics.postsCount();
+        commentsCount = statistics.commentsCount();
+
+        if (usersCount > 0 && postsCount > 0) {
+            meanPostsNumberPerUser = (double) postsCount / usersCount;
+            meanCommentsNumberPerUser = (double) commentsCount/ usersCount;
+            meanCommentsNumberPerPost = (double) commentsCount / postsCount;
+        }
+        else if ( usersCount > 0 && postsCount == 0) {
+            meanPostsNumberPerUser = 0;
+            meanCommentsNumberPerUser = 0;
+            meanCommentsNumberPerPost = 0;
+        } else {
+            meanPostsNumberPerUser = -1;
+            meanCommentsNumberPerUser = -1;
+            meanCommentsNumberPerPost = -1;
+            System.out.println("Incorrect data. There are no users in the database.");
+        }
+        return statistics;
     }
-
-    public int commentsCount () {
-        return 299;
-    }
-
-
     public void showStatistics () {
 
+        System.out.println("Number of users: " + usersCount);
+        System.out.println("Number of posts: " + postsCount);
+        System.out.println("Number of comments: " + commentsCount);
+        System.out.println("Mean number of posts per user: " + meanPostsNumberPerUser);
+        System.out.println("Mean number of comments per post: " + meanCommentsNumberPerPost);
+        System.out.println("Mean number of comments per user: " + meanCommentsNumberPerUser);
     }
 
-    public Statistics calculateAdvStatistics (Statistics statistics){
-        usersNumber = this.usersNames().size();
-
+    public double getMeanPostsNumberPerUser() {
+        return meanPostsNumberPerUser;
     }
 
+    public double getMeanCommentsNumberPerUser() {
+        return meanCommentsNumberPerUser;
+    }
+
+    public double getMeanCommentsNumberPerPost() {
+        return meanCommentsNumberPerPost;
+    }
 }
