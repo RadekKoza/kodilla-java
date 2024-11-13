@@ -1,5 +1,6 @@
 package com.kodilla.testing.forum.statistics;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -7,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -21,9 +23,17 @@ class ForumStatisticsTestSuite {
         return usersNames;
     }
 
-    List<String> usersNames0 = new ArrayList<>();
-    List<String> usersNames57 = generateUsersList(57);
-    List<String> usersNames100 = generateUsersList(100);
+    List<String> usersNames0;
+    List<String> usersNames57;
+    List<String> usersNames100;
+
+    @BeforeEach
+    public void init() {
+        usersNames0 = new ArrayList<>();
+        usersNames57 = generateUsersList(57);
+        usersNames100 = generateUsersList(100);
+    }
+
 
     @Mock
     private Statistics statisticsMock;

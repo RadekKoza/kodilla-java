@@ -12,7 +12,7 @@ public class FileReaderWithoutHandling {
     public void readFile() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("names.txt").getFile());
-        Path path = Paths.get("tego-pliku-nie-ma.txt");//file.getPath()
+        Path path = Paths.get(file.getPath());//"tego-pliku-nie-ma.txt"
 
         Stream<String> fileLines = Files.lines(Paths.get(file.getPath()));
         fileLines.forEach(System.out::println);

@@ -1,8 +1,6 @@
 package com.kodilla.rps;
 
-import java.util.Scanner;
-import static com.kodilla.rps.Game.scanner;
-import static com.kodilla.rps.Game.toolChoice;
+import static com.kodilla.rps.WinningChoice.toolChoice;
 
 public class PlayRound {
     private final String playerChoice;
@@ -12,18 +10,18 @@ public class PlayRound {
     }
     public String getWinner() {
 
-        int computerIndexChoice = CompResponse.respond(playerChoice)-1;
         int playerIndexChoice = Integer.parseInt(playerChoice)-1;
+        int computerIndexChoice = CompResponse.respond(playerChoice)-1;
         String playerToolChoice = toolChoice.get(playerIndexChoice);
         String compToolChoice = toolChoice.get(computerIndexChoice);
-        String winningChoice = WinningChoice.getWinChoice(playerToolChoice, compToolChoice);
+        String winningChoice = WinningChoice.getWinChoice(playerIndexChoice, computerIndexChoice);
         String theWinner = "";
 
         if (playerIndexChoice == computerIndexChoice) {
             theWinner = "draw";
         }
         else if (winningChoice.equals(playerToolChoice))
-            theWinner = IntroDialog.getPlayerName();
+            theWinner = Dialog.getPlayerName();
         else if (winningChoice.equals(compToolChoice))
             theWinner = "computer";
 
