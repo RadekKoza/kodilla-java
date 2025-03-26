@@ -31,7 +31,7 @@ public class TaskList {
     public TaskList() {
     }
 
-    public TaskList(String description, String listName ) {
+    public TaskList(String listName, String description ) {
         this.description = description;
         this.listName = listName;
     }

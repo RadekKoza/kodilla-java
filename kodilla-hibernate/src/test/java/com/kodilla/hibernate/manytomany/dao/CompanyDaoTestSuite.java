@@ -2,9 +2,12 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +16,8 @@ class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -58,5 +63,41 @@ class CompanyDaoTestSuite {
         } catch (Exception e) {
             //do nothing
         }
+    }
+
+    @Transactional
+    @Test
+    void retrieveSelectedNameTest() {
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee adamSmith = new Employee("Adam", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+        employeeDao.save(johnSmith);
+        employeeDao.save(adamSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+        //When
+        List<Employee> selectedEmployees = employeeDao.retrieveSelectedName("Smith");
+        //Then
+        assertEquals(2, selectedEmployees.size());
+    }
+
+    @Transactional
+    @Test
+    void findCompNameBy3LettersTest() {
+        //Given
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Grey Matter");
+        Company greyhound = new Company("Greyhound");
+        //When
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+        companyDao.save(greyhound);
+        List<Company> selectedCompanies = companyDao.findCompNameBy3Letters("gre");
+        //Then
+        assertEquals(2, selectedCompanies.size());
     }
 }
