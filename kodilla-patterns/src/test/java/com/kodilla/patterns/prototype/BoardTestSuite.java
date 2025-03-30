@@ -11,19 +11,19 @@ class BoardTestSuite {
     void testToString() {
         //given
         //creating the TasksList for todos
-        TasksList listToDo = new TasksList("To Do Tasks");
+        TasksList listToDo = new TasksList("To Do Task");
         IntStream.iterate(1, n -> n + 1)
                 .limit(10)
                 .forEach(n -> listToDo.getTasks().add(new Task("To Do Task number " + n)));
 
         //creating the TasksList for tasks in progress
-        TasksList listInProgress = new TasksList("In Progress Tasks");
+        TasksList listInProgress = new TasksList("In Progress Task");
         IntStream.iterate(1, n -> n + 1)
                 .limit(10)
                 .forEach(n -> listInProgress.getTasks().add(new Task("In Progress Task number " + n)));
 
         //creating the TasksList for done tasks
-        TasksList listDone = new TasksList("Done Tasks");
+        TasksList listDone = new TasksList("Done Task");
         IntStream.iterate(1, n -> n + 1)
                 .limit(10)
                 .forEach(n -> listDone.getTasks().add(new Task("Done Task number " + n)));
