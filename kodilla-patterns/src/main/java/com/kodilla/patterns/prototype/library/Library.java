@@ -1,8 +1,6 @@
 package com.kodilla.patterns.prototype.library;
 
 import com.kodilla.patterns.prototype.Prototype;
-import com.kodilla.patterns.prototype.Task;
-import com.kodilla.patterns.prototype.TasksList;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,9 +29,8 @@ public final class Library extends Prototype<Library> {
     @Override
     public String toString() {
         String s = name + "\n";
-        for (Book book : books) {
+        for (Book book : books)
             s = s + book.toString() + "\n";
-        }
         return s;
     }
     public Library shallowCopy() throws CloneNotSupportedException {
@@ -44,7 +41,7 @@ public final class Library extends Prototype<Library> {
         Library clonedLibrary = super.clone();
         clonedLibrary.books = new HashSet<>();
         for (Book book : books) {
-            clonedLibrary.getBooks().add(book);
+            clonedLibrary.getBooks().add(new Book(book.getTitle(),book.getAuthor(),book.getPublicationDate()));
         }
         return clonedLibrary;
     }
